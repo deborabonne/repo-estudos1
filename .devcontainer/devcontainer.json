@@ -1,0 +1,15 @@
+{
+  "name": "Ubuntu Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-20.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/mongo:1": {}
+  },
+
+  "forwardPorts": [22, 80, 8080, 8081, 8082, 9000, 9393, 5900, 5901],
+
+  "postCreateCommand": "apt-get update && apt-get install -y curl git vim && docker volume create portainer_data && docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce"
+}
